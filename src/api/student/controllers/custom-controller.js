@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use strict';
 
 const course = require("../../course/controllers/course");
@@ -25,7 +26,7 @@ module.exports = {
             ctx.status = 200;
         } catch (error) {
             ctx.throw(500, error);
-        }
-    }
+        } 
+    },
 
 }

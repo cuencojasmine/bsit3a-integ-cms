@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "midterm_courses",
+  "info": {
+    "singularName": "midterm-course",
+    "pluralName": "midterm-courses",
+    "displayName": "Midterm Course"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "course_name": {
+      "type": "string"
+    },
+    "course_code": {
+      "type": "string"
+    },
+    "midterm_students": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::midterm-student.midterm-student",
+      "mappedBy": "midterm_course"
+    }
+  }
+}

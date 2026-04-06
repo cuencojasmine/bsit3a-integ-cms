@@ -460,6 +460,77 @@ export interface ApiCourseCourse extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiMidtermCourseMidtermCourse
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'midterm_courses';
+  info: {
+    displayName: 'Midterm Course';
+    pluralName: 'midterm-courses';
+    singularName: 'midterm-course';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    course_code: Schema.Attribute.String;
+    course_name: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::midterm-course.midterm-course'
+    > &
+      Schema.Attribute.Private;
+    midterm_students: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::midterm-student.midterm-student'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiMidtermStudentMidtermStudent
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'midterm_students';
+  info: {
+    displayName: 'Midterm Student';
+    pluralName: 'midterm-students';
+    singularName: 'midterm-student';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    age: Schema.Attribute.Integer;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    first_name: Schema.Attribute.String;
+    last_name: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::midterm-student.midterm-student'
+    > &
+      Schema.Attribute.Private;
+    midterm_course: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::midterm-course.midterm-course'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    student_status: Schema.Attribute.Enumeration<['active', 'inactive']> &
+      Schema.Attribute.DefaultTo<'active'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiStudentInfoStudentInfo extends Struct.CollectionTypeSchema {
   collectionName: 'student_infos';
   info: {
@@ -1046,6 +1117,8 @@ declare module '@strapi/strapi' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
       'api::course.course': ApiCourseCourse;
+      'api::midterm-course.midterm-course': ApiMidtermCourseMidtermCourse;
+      'api::midterm-student.midterm-student': ApiMidtermStudentMidtermStudent;
       'api::student-info.student-info': ApiStudentInfoStudentInfo;
       'api::student.student': ApiStudentStudent;
       'plugin::content-releases.release': PluginContentReleasesRelease;

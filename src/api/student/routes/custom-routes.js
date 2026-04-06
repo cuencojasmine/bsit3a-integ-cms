@@ -9,7 +9,8 @@ module.exports = {
             method: 'GET',
             path: '/students/list',
             handler: 'custom-controller.getStudents',
-        }
+        },
+
     ],
     
 };

@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "midterm_students",
+  "info": {
+    "singularName": "midterm-student",
+    "pluralName": "midterm-students",
+    "displayName": "Midterm Student"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "age": {
+      "type": "integer"
+    },
+    "student_status": {
+      "type": "enumeration",
+      "default": "active",
+      "enum": [
+        "active",
+        "inactive"
+      ]
+    },
+    "midterm_course": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::midterm-course.midterm-course",
+      "inversedBy": "midterm_students"
+    }
+  }
+}
