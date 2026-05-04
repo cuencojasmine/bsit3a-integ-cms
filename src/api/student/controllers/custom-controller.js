@@ -92,10 +92,36 @@ module.exports = {
                     course: true
                 }
             });
-            ctx.body = createStudent;
+            ctx.body = updateStudent;
         } catch (error) {
             ctx.throw(500, error);
         }
     },
+
+    // Delete a student
+    async deleteStudent(ctx) {
+        try {
+            const { id } = ctx.params;
+
+            const existingStudent = await strapi.documents('api::student.student').findOne({
+                documentId: id
+            });
+
+            if (!existingStudent) {
+                return ctx.notFound("Student not found");
+            }
+
+            const deleteStudent = await strapi.documents('api::student.student').delete({
+                documentId: id
+            });
+            ctx.body = {
+                message: "Student deleted successfully",
+                data: deleteStudent,
+                status: 200
+            }
+        } catch (error) {
+            ctx.throw(500, error);
+        }
+    }
 
 }

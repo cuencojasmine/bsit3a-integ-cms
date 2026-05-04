@@ -21,8 +21,13 @@ module.exports = {
             method: 'PUT',
             path: '/students/update/:id',
             handler: 'custom-controller.updateStudent',
-        }
+        },
 
+        {
+            method: 'DELETE',
+            path: '/students/delete/:id',
+            handler: 'custom-controller.deleteStudent',
+        }
     ],
     
 };
