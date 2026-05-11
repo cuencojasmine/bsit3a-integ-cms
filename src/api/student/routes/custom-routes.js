@@ -4,7 +4,7 @@ const { routes } = require("../../student-info/routes/custom-routes");
 
 module.exports = {
 
-    routes:[
+    routes: [
         {
             method: 'GET',
             path: '/students/list',
@@ -27,7 +27,19 @@ module.exports = {
             method: 'DELETE',
             path: '/students/delete/:id',
             handler: 'custom-controller.deleteStudent',
+        },
+
+        {
+            method: 'DELETE',
+            path: '/students/delete-by-course/:course_id',
+            handler: 'custom-controller.deleteStudentbyCourse',
+        },
+
+        {
+            method: 'POST',
+            path: '/students/create-and-validate',
+            handler: 'custom-controller.createAndValidateStudent',
         }
     ],
-    
+
 };
